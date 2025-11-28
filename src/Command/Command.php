@@ -46,5 +46,35 @@ class Command
         }
 
         echo $contact->toString() . "\n";
-    }        
+    }    
+    
+    /**
+     * 
+     * Création d'un nouveau contact
+     */   
+    public function create(string $name, string $email, string $phone): void
+    {
+        $contact = $this->manager->create($name, $email, $phone);
+
+        echo "Contact créé : " . $contact->toString() . "\n";
+    }  
+
+    /**
+     * Suppression d'un contact à partir de son id
+     */       
+    public function delete(int $id): void
+    {
+        $contact = $this->manager->findById($id);
+
+        if ($contact === null) {
+            echo "Aucun contact trouvé pour l’ID {$id}.\n";
+            return;
+        }
+
+        $this->manager->delete($id);
+
+        echo "Contact ID {$id} supprimé.\n";
+    }
+
+
 }

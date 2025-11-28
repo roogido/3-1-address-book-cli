@@ -58,5 +58,42 @@ class ContactManager
         );
     }
    
+    /**
+     * 
+     * Création d'un nouveau contact
+     */    
+    public function create(string $name, string $email, string $phone): Contact
+    {
+        $pdo = DBConnect::getPDO();
+
+        $stmt = $pdo->prepare("
+            INSERT INTO contact (name, email, phone_number)
+            VALUES (:name, :email, :phone)
+        ");
+
+        $stmt->bindValue(':name', $name);
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':phone', $phone) ;
+
+        $stmt->execute();
+
+        $id = (int) $pdo->lastInsertId();
+
+        return new Contact($id, $name, $email, $phone);
+    }
+
+    /**
+     * Suppression d'un contact à partir de son id
+     */       
+    public function delete(int $id): bool
+    {
+        $pdo = DBConnect::getPDO();
+
+        $stmt = $pdo->prepare("DELETE FROM contact WHERE id = :id");
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
     
 }
