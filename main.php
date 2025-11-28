@@ -2,11 +2,11 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use App\Manager\ContactManager;
+use App\Command\Command;
 
 
 
-$manager = new ContactManager();
+$command = new Command();
 
 while (true) {
     $line = trim(readline("Commandes (list, quit) : "));
@@ -17,17 +17,7 @@ while (true) {
     }
 
     if ($line === 'list') {
-        $contacts = $manager->findAll();                // Contient les objets contacts
-
-        if (empty($contacts)) {
-            echo "Aucun contact.\n";
-            continue;
-        }
-
-        foreach ($contacts as $contact) {
-            echo $contact->toString() . "\n";           // Affichage d'un contact
-        }
-
+        $command->list();
         continue;
     }
 
