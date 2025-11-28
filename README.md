@@ -1,6 +1,6 @@
 # Gestionnaire de contacts (CLI)
 
-pplication PHP en ligne de commande permettant de gérer un carnet d’adresses.
+Application PHP en ligne de commande permettant de gérer un carnet d’adresses.
 Ce projet a été réalisé dans le cadre de la formation OpenClassrooms — Développeur d’application Fullstack (2025–2026).
 Il s’appuie sur une architecture orientée objet (OOP), utilise PDO pour accéder à une base MySQL/Maria DB, et propose plusieurs commandes CLI pour afficher, créer, modifier et supprimer des contacts.
 
@@ -82,4 +82,7 @@ help
 quit
 
 ## Requis 
-PHP 8.2+
+- PHP 8.2+
+- Composer
+- MySQL ou MariaDB
+- Extension PHP pdo_mysql
