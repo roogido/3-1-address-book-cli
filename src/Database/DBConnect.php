@@ -13,7 +13,7 @@ class DBConnect
 {
     private static ?PDO $pdo = null;
 
-    
+
     public static function getPDO(): PDO
     {
         if (self::$pdo !== null) {
@@ -25,10 +25,11 @@ class DBConnect
 
         $host = $_ENV['DB_HOST'];
         $db   = $_ENV['DB_DATABASE'];
+        $port = $_ENV['DB_PORT'];
         $user = $_ENV['DB_USERNAME'];
         $pass = $_ENV['DB_PASSWORD'];
 
-        $dsn = "mysql:host={$host};dbname={$db};charset=utf8mb4";
+        $dsn = "mysql:host={$host}:{$port};dbname={$db};charset=utf8mb4";
 
         try {
             self::$pdo = new PDO($dsn, $user, $pass, [
