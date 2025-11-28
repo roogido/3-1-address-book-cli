@@ -1,4 +1,16 @@
 <?php declare(strict_types=1);
+/**
+ * main.php
+ *
+ * Point d'entrée de l'application CLI de gestion de contacts.
+ * Gère la lecture des commandes utilisateur et délègue l'exécution
+ * à la classe App\Command\Command.
+ *
+ *
+ * Date : Mercredi 26 novembre 2025
+ * Maj  : Vendredi 28 novembre 2025
+ * Auteur : Salem Hadjali
+ */
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -35,6 +47,7 @@ while (true) {
     // Création d'un nouveau contact
     // Commande & Format attendu : create <Nom>, <email>, <num. tél>
     if (preg_match('/^create\s+([^,]+),\s*([^,]+),\s*(.+)$/', $line, $matches)) {
+        // Affectation et nettoyage avec create en BDD
         $name  = trim($matches[1]);
         $email = trim($matches[2]);
         $phone = trim($matches[3]);

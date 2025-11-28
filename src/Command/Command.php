@@ -1,9 +1,19 @@
 <?php declare(strict_types=1);
+/**
+ * Command.php
+ *
+ * Contient toute la logique d’exécution des commandes CLI :
+ * list, detail, create, modify, delete, help.
+ * Délègue la récupération et la persistance des données au ContactManager.
+ *
+ * Date : Mercredi 26 novembre 2025
+ * Maj  : Vendredi 28 novembre 2025
+ * Auteur : Salem Hadjali
+ */
 
 namespace App\Command;
 
 use App\Manager\ContactManager;
-
 
 
 
@@ -29,7 +39,6 @@ class Command
         }
 
         foreach ($contacts as $contact) {
-            //echo $contact->toString() . "\n";
             echo $contact . "\n";
         }
     }
@@ -46,7 +55,6 @@ class Command
             return;
         }
 
-        //echo $contact->toString() . "\n";
         echo $contact . "\n";
     }    
     
@@ -58,7 +66,6 @@ class Command
     {
         $contact = $this->manager->create($name, $email, $phone);
 
-        // echo "Contact créé : " . $contact->toString() . "\n";
         echo $contact . "\n";
     }  
 
@@ -102,13 +109,13 @@ class Command
     public function help(): void
     {
         echo "Commandes disponibles :\n";
-        echo "  list                       - Affiche tous les contacts\n";
-        echo "  detail [id]                - Affiche un contact via son identifiant\n";
-        echo "  create name, email, phone  - Ajoute un nouveau contact\n";
-        echo "  delete [id]                - Supprime un contact via son identifiant\n";
+        echo "  list                            - Affiche tous les contacts\n";
+        echo "  detail [id]                     - Affiche un contact via son identifiant\n";
+        echo "  create name, email, phone       - Ajoute un nouveau contact\n";
+        echo "  delete [id]                     - Supprime un contact via son identifiant\n";
         echo "  modify [id], name, email, phone - Modifie un contact existant\n";
-        echo "  help                       - Affiche cette aide\n";
-        echo "  quit                       - Quitte l'application\n";
+        echo "  help                            - Affiche cette aide\n";
+        echo "  quit                            - Quitte l'application\n";
     }    
 
 }

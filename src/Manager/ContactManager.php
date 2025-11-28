@@ -1,4 +1,15 @@
 <?php declare(strict_types=1);
+/**
+ * ContactManager.php
+ *
+ * Assure la communication avec la base de données pour les entités Contact.
+ * Fournit les opérations CRUD : findAll, findById, create, update, delete.
+ * Retourne toujours des objets Contact pour un modèle orienté objet propre.
+ *
+ * Date : Mercredi 26 novembre 2025
+ * Maj  : Vendredi 28 novembre 2025
+ * Auteur : Salem Hadjali
+ */
 
 namespace App\Manager;
 
@@ -16,13 +27,13 @@ class ContactManager
     public function findAll(): array
     {
         $pdo = DBConnect::getPDO();
-        $stmt = $pdo->query("SELECT * FROM contact ORDER BY id ASC");
+        $stmt = $pdo->query("SELECT * FROM contact ORDER BY id ASC");       // Requête simple (-> ici aucun paramètre)
 
         $rows = $stmt->fetchAll();
 
         $contacts = [];
 
-        foreach ($rows as $row) {
+        foreach ($rows as $row) {                                           // L'array $contacts contients ici les objs de type Contact
             $contacts[] = new Contact(
                 (int) $row['id'],
                 $row['name'],
@@ -41,8 +52,8 @@ class ContactManager
     {
         $pdo = DBConnect::getPDO();
 
-        $stmt = $pdo->prepare("SELECT * FROM contact WHERE id = :id");
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt = $pdo->prepare("SELECT * FROM contact WHERE id = :id");  // Requête préparée (id seul en paramètre)
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);                   // Sécurité (protection des paramètres reçus contre les injections SQL)
         $stmt->execute();
         $row = $stmt->fetch();
 

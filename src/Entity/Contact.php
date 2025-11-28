@@ -1,4 +1,15 @@
 <?php declare(strict_types=1);
+/**
+ * Contact.php
+ *
+ * Représente un contact en mémoire (entité métier).
+ * Contient les propriétés id, name, email, phoneNumber,
+ * leurs accesseurs/mutateurs ainsi que la méthode magique __toString().
+ *
+ * Date : Mercredi 26 novembre 2025
+ * Maj  : Vendredi 28 novembre 2025
+ * Auteur : Salem Hadjali
+ */
 
 namespace App\Entity;
 
@@ -23,7 +34,7 @@ class Contact
         $this->phoneNumber = $phoneNumber;
     }
 
-    public function getId(): ?int
+    public function getId(): ?int                                   // getter
     {
         return $this->id;
     }
@@ -33,7 +44,7 @@ class Contact
         return $this->name;
     }
 
-    public function setName(?string $name): void
+    public function setName(?string $name): void                    // setter
     {
         $this->name = $name;
     }
@@ -58,16 +69,14 @@ class Contact
         $this->phoneNumber = $phoneNumber;
     }
 
-    // public function toString(): string
-    // {
-    //     return sprintf(
-    //         "ID: %d, Nom: %s, Email: %s, Téléphone: %s",
-    //         $this->id,
-    //         $this->name,
-    //         $this->email,
-    //         $this->phoneNumber
-    //     );
-    // }
+    /**
+     * Convertit l'objet Contact en chaîne de caractères lisible.
+     *
+     * Cette méthode magique est automatiquement appelée lorsque
+     * l'objet est utilisé dans un contexte textuel (echo, print, concaténation...).
+     *
+     * @return string Représentation textuelle du contact.
+     */
     public function __toString(): string
     {
         return sprintf(

@@ -1,4 +1,15 @@
 <?php declare(strict_types=1);
+/**
+ * DBConnect.php
+ *
+ * Fournit une connexion PDO unique à la base de données.
+ * Charge les variables d'environnement via phpdotenv
+ * et expose une méthode statique getPDO() utilisée par les managers.
+ *
+ * Date : Mercredi 26 novembre 2025
+ * Maj  : Vendredi 28 novembre 2025
+ * Auteur : Salem Hadjali
+ */
 
 namespace App\Database;
 
