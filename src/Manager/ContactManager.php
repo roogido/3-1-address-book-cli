@@ -33,4 +33,30 @@ class ContactManager
 
         return $contacts;
     }
+
+    /**
+     * Retourne un contact par son ID, ou null s'il n'existe pas.
+     */
+    public function findById(int $id): ?Contact
+    {
+        $pdo = DBConnect::getPDO();
+
+        $stmt = $pdo->prepare("SELECT * FROM contact WHERE id = :id");
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch();
+
+        if (!$row) {
+            return null;
+        }
+
+        return new Contact(
+            (int) $row['id'],
+            $row['name'],
+            $row['email'],
+            $row['phone_number']
+        );
+    }
+   
+    
 }

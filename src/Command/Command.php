@@ -17,11 +17,11 @@ class Command
     }
 
     /**
-     * Affiche la liste complète des contacts
+     * Affiche la liste complète des contact
      */
     public function list(): void
     {
-        $contacts = $this->manager->findAll();
+        $contacts = $this->manager->findAll() ;
 
         if (empty($contacts)) {
             echo "Aucun contact.\n";
@@ -32,4 +32,19 @@ class Command
             echo $contact->toString() . "\n";
         }
     }
+
+    /**
+     * Affiche le détail d'un contact d
+     */
+    public function detail(int $id): void
+    {
+        $contact = $this->manager->findById($id);
+
+        if ($contact === null) {
+            echo "Aucun contact trouvvé pour l’ID {$id}.\n";
+            return;
+        }
+
+        echo $contact->toString() . "\n";
+    }        
 }

@@ -9,7 +9,7 @@ use App\Command\Command;
 $command = new Command();
 
 while (true) {
-    $line = trim(readline("Commandes (list, quit) : "));
+    $line = trim(readline("Commandes (list, detail [id], quit) : "));
 
     if ($line === 'quit') {
         echo "Au revoir !\n";
@@ -18,6 +18,13 @@ while (true) {
 
     if ($line === 'list') {
         $command->list();
+        continue;
+    }
+
+    // Commande detail <id>
+    if (preg_match('/^detail\s+(\d+)$/', $line, $matches)) {
+        $id = (int) $matches[1];
+        $command->detail($id);
         continue;
     }
 
