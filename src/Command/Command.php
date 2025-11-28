@@ -29,7 +29,8 @@ class Command
         }
 
         foreach ($contacts as $contact) {
-            echo $contact->toString() . "\n";
+            //echo $contact->toString() . "\n";
+            echo $contact . "\n";
         }
     }
 
@@ -45,7 +46,8 @@ class Command
             return;
         }
 
-        echo $contact->toString() . "\n";
+        //echo $contact->toString() . "\n";
+        echo $contact . "\n";
     }    
     
     /**
@@ -56,7 +58,8 @@ class Command
     {
         $contact = $this->manager->create($name, $email, $phone);
 
-        echo "Contact créé : " . $contact->toString() . "\n";
+        // echo "Contact créé : " . $contact->toString() . "\n";
+        echo $contact . "\n";
     }  
 
     /**
@@ -76,5 +79,36 @@ class Command
         echo "Contact ID {$id} supprimé.\n";
     }
 
+    /**
+     * Update d'un contact
+    */  
+    public function modify(int $id, string $name, string $email, string $phone): void
+    {
+        $contact = $this->manager->findById($id);
+
+        if ($contact === null) {
+            echo "Contact introuvable pour l’ID {$id}.\n";
+            return;
+        }
+
+        $updated = $this->manager->update($id, $name, $email, $phone);
+
+        echo "Contact mis à jour : " . $updated . "\n";
+    }
+
+    /**
+     * Aide affichée
+     */       
+    public function help(): void
+    {
+        echo "Commandes disponibles :\n";
+        echo "  list                       - Affiche tous les contacts\n";
+        echo "  detail [id]                - Affiche un contact via son identifiant\n";
+        echo "  create name, email, phone  - Ajoute un nouveau contact\n";
+        echo "  delete [id]                - Supprime un contact via son identifiant\n";
+        echo "  modify [id], name, email, phone - Modifie un contact existant\n";
+        echo "  help                       - Affiche cette aide\n";
+        echo "  quit                       - Quitte l'application\n";
+    }    
 
 }

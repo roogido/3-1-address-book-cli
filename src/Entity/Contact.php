@@ -58,7 +58,17 @@ class Contact
         $this->phoneNumber = $phoneNumber;
     }
 
-    public function toString(): string
+    // public function toString(): string
+    // {
+    //     return sprintf(
+    //         "ID: %d, Nom: %s, Email: %s, Téléphone: %s",
+    //         $this->id,
+    //         $this->name,
+    //         $this->email,
+    //         $this->phoneNumber
+    //     );
+    // }
+    public function __toString(): string
     {
         return sprintf(
             "ID: %d, Nom: %s, Email: %s, Téléphone: %s",
@@ -68,4 +78,5 @@ class Contact
             $this->phoneNumber
         );
     }
+
 }

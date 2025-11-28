@@ -95,5 +95,31 @@ class ContactManager
         return $stmt->execute();
     }
 
+    /**
+     * Update d'un contact 
+     */       
+    public function update(int $id, string $name, string $email, string $phone): ?Contact
+    {
+        $pdo = DBConnect::getPDO();
+
+        $stmt = $pdo->prepare("
+            UPDATE contact
+            SET name = :name,
+                email = :email,
+                phone_number = :phone
+            WHERE id = :id
+        ");
+
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+        $stmt->bindValue(':name', $name);
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':phone', $phone);
+
+        $stmt->execute();
+
+        // Recharge l'objet Contact
+        return $this->findById($id);
+    }
     
 }
+

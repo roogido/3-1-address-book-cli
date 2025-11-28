@@ -10,7 +10,7 @@ $command = new Command();
 
 while (true) {
     // Lecture du prompt (saisie utilisateur)
-    $line = trim(readline("Commandes (list, detail [id], create name, email, phone, delete [id], quit) : "));
+    $line = trim(readline("Commandes (list, detail [id], create [name, email, phone], modify [id, name, email, phone], delete [id], help, quit) : "));
 
     // Quitter l'appli.
     if ($line === 'quit') {
@@ -51,6 +51,24 @@ while (true) {
         continue;
     }
 
+    // Update d'un contact
+    // Format attendu : modify <id>, <prénom nom>, <email>, <tél>
+    // Ex. : modify 3, Salem Hadjali, salem.hadjali@sh.com, 0455667788
+    if (preg_match('/^modify\s+(\d+),\s*([^,]+),\s*([^,]+),\s*(.+)$/', $line, $matches)) {
+        $id    = (int) $matches[1];
+        $name  = trim($matches[2]);
+        $email = trim($matches[3]);
+        $phone = trim($matches[4]);
+
+        $command->modify($id, $name, $email, $phone);
+        continue;
+    }
+
+    // Affichage de l'aide sur les cocommandes
+    if ($line === 'help') {
+        $command->help();
+        continue;
+    }
 
     echo "Commande inconnue.\n";
 }
